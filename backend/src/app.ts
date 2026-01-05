@@ -10,6 +10,8 @@ app.use(cookieParser());
 app.use(cors({
     origin: config.CLIENT_URL,
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 app.get('/', (req, res) => {
