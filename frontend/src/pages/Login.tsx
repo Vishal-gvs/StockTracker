@@ -34,7 +34,7 @@ const Login = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const res = await api.post('/auth/login', data);
-      login(res.data.user);
+      login(res.data.user, res.data.accessToken);
     } catch (error) {
       alert('Login failed');
     }
@@ -51,7 +51,7 @@ const Login = () => {
           email,
           googleId 
         }); 
-        login(res.data.user); 
+        login(res.data.user, res.data.accessToken); 
       }
     } catch (e) {
       console.error(e);

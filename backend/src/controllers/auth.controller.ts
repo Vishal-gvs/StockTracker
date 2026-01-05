@@ -25,7 +25,11 @@ export const login = async (req: Request, res: Response) => {
     res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
     res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
-    res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.json({ 
+      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      accessToken,
+      refreshToken
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
@@ -53,7 +57,11 @@ export const googleLogin = async (req: Request, res: Response) => {
     res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
     res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
-    res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.json({ 
+      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      accessToken,
+      refreshToken
+    });
   } catch (error) {
      res.status(500).json({ message: 'Server error' });
   }
@@ -86,7 +94,11 @@ export const register = async (req: Request, res: Response) => {
     res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
     res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
-      res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
+    res.json({ 
+      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+      accessToken,
+      refreshToken
+    });
     } catch (error) {
       res.status(500).json({ message: 'Error registering user' });
     }

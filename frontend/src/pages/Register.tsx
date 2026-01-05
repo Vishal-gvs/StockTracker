@@ -28,14 +28,13 @@ const Register = () => {
       try {
         if (credentialResponse.credential) {
           const decoded: any = jwtDecode(credentialResponse.credential);
-          const { name, email, sub: googleId } = decoded;
           
           const res = await api.post('/auth/google', {
-            name,
-            email,
-            googleId 
+            name: decoded.name,
+            email: decoded.email,
+            googleId: decoded.sub 
           }); 
-          login(res.data.user); 
+          login(res.data.user, res.data.accessToken); 
         }
       } catch (e) {
         console.error(e);
@@ -46,7 +45,7 @@ const Register = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const res = await api.post('/auth/register', data);
-      login(res.data.user);
+      login(res.data.user, res.data.accessToken);
       navigate('/'); 
     } catch (error: any) {
       alert(error.response?.data?.message || 'Registration failed');

@@ -11,7 +11,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null;
-  login: (userData: User) => void;
+  login: (userData: User, token?: string) => void;
   logout: () => void;
   isAuthenticated: boolean;
   loading: boolean;
@@ -36,9 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setLoading(false);
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: User, token?: string) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+    if (token) localStorage.setItem('accessToken', token);
+    
     if (userData.role === 'admin') {
       navigate('/admin');
     } else {
@@ -54,6 +56,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
     setUser(null);
     localStorage.removeItem('user');
+    localStorage.removeItem('accessToken');
     navigate('/');
   };
 
