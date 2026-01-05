@@ -21,8 +21,9 @@ export const login = async (req: Request, res: Response) => {
 
     const { accessToken, refreshToken } = generateTokens(user);
 
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
     res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
@@ -48,8 +49,9 @@ export const googleLogin = async (req: Request, res: Response) => {
 
     const { accessToken, refreshToken } = generateTokens(user);
 
-    res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
-    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
     res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
   } catch (error) {
@@ -80,8 +82,9 @@ export const register = async (req: Request, res: Response) => {
       await user.save();
 
       const { accessToken, refreshToken } = generateTokens(user);
-      res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
-      res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'lax' });
+    const isProduction = process.env.NODE_ENV === 'production';
+    res.cookie('accessToken', accessToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: isProduction, sameSite: isProduction ? 'none' : 'lax' });
 
       res.json({ user: { id: user._id, name: user.name, email: user.email, role: user.role } });
     } catch (error) {
