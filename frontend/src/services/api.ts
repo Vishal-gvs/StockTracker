@@ -22,6 +22,7 @@ api.interceptors.response.use(
     // Given the timeframe, basic setup:
     if (error.response?.status === 401 || error.response?.status === 403) {
       localStorage.removeItem('user');
+      localStorage.removeItem('accessToken');
       window.location.href = '/';
     }
     return Promise.reject(error);

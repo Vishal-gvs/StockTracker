@@ -4,15 +4,19 @@ import cookieParser from 'cookie-parser';
 import { config } from './config/env';
 
 const app = express();
-
-app.use(express.json());
-app.use(cookieParser());
+// CORS Middleware MUST be first
 app.use(cors({
     origin: config.CLIENT_URL,
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
+
+// Handle Preflight Requests explicitly
+app.options('*', cors() as any);
+
+app.use(express.json());
+app.use(cookieParser());
 
 app.get('/', (req, res) => {
     res.send('API is running...');
