@@ -8,7 +8,7 @@ import AdminExpenditure from './pages/AdminExpenditure';
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
   if (loading) return <div>Loading...</div>; // Or spinner
-  return user ? <Outlet /> : <Navigate to="/login" replace />;
+  return user ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 const AdminRoute = () => {
@@ -20,12 +20,10 @@ const AdminRoute = () => {
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
+      <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
       
       <Route element={<ProtectedRoute />}>
-         {/* Redirect root to dashboard */}
-         <Route path="/" element={<Navigate to="/dashboard" replace />} />
          <Route path="/dashboard" element={<MainPage />} />
          
          <Route element={<AdminRoute />}>
@@ -33,7 +31,7 @@ function App() {
          </Route>
       </Route>
 
-      <Route path="*" element={<Navigate to="/dashboard" />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
