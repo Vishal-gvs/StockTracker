@@ -12,8 +12,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
-// Handle Preflight Requests explicitly
-app.options('*', cors() as any);
+// Handle Preflight Requests explicitly - Express 5 syntax
+app.options('(.*)', cors() as any);
 
 app.use(express.json());
 app.use(cookieParser());
