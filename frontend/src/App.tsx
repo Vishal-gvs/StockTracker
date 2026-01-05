@@ -24,14 +24,16 @@ function App() {
       <Route path="/register" element={<Register />} />
       
       <Route element={<ProtectedRoute />}>
-         <Route path="/" element={<MainPage />} />
+         {/* Redirect root to dashboard */}
+         <Route path="/" element={<Navigate to="/dashboard" replace />} />
+         <Route path="/dashboard" element={<MainPage />} />
          
          <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminExpenditure />} />
          </Route>
       </Route>
 
-      <Route path="*" element={<Navigate to="/" />} />
+      <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
   );
 }
