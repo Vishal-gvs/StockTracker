@@ -191,8 +191,8 @@ const AdminExpenditure = () => {
                                 <tr key={exp._id}>
                                     <td className="px-6 py-4 whitespace-nowrap">{exp.itemId?.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{exp.quantityUsed}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">${exp.itemId?.costPerUnit}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">${exp.quantityUsed * (exp.itemId?.costPerUnit || 0)}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">₹{exp.itemId?.costPerUnit}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">₹{exp.quantityUsed * (exp.itemId?.costPerUnit || 0)}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{exp.userId?.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${exp.finalized ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
@@ -235,7 +235,7 @@ const AdminExpenditure = () => {
                                 <tr key={item._id}>
                                     <td className="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{item.name}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{item.availableStock}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">${item.costPerUnit}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">₹{item.costPerUnit}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <button 
                                             onClick={() => {
