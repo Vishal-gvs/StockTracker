@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import * as XLSX from 'xlsx';
 import api from '../services/api';
@@ -134,6 +135,12 @@ const AdminExpenditure = () => {
                   >
                       Inventory
                   </button>
+                  <Link 
+                    to="/history" 
+                    className="px-3 py-2 rounded-md text-sm font-medium text-gray-900 hover:bg-gray-200"
+                  >
+                      History
+                  </Link>
               </div>
             </div>
             <div className="flex items-center space-x-4">

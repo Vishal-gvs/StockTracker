@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import MainPage from './pages/MainPage';
 import AdminExpenditure from './pages/AdminExpenditure';
+import ExcelHistory from './pages/ExcelHistory';
 
 const ProtectedRoute = () => {
   const { user, loading } = useAuth();
@@ -28,6 +29,7 @@ function App() {
          
          <Route element={<AdminRoute />}>
             <Route path="/admin" element={<AdminExpenditure />} />
+            <Route path="/history" element={<ExcelHistory />} />
          </Route>
       </Route>
 

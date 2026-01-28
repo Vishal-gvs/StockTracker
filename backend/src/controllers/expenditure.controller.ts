@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import Expenditure from '../models/Expenditure';
 import Item from '../models/Item';
 import { isToday, getStartOfDay, getEndOfDay } from '../utils/date.util';
+import { createAndStoreExcel } from '../services/excel.service';
 
 export const addExpenditure = async (req: Request, res: Response) => {
   try {
@@ -84,6 +85,14 @@ export const finalizeDay = async (req: Request, res: Response) => {
     for (const exp of expenditures) {
       exp.finalized = true;
       await exp.save();
+    }
+
+    // Auto-generate Excel Report
+    try {
+        await createAndStoreExcel((req as any).user.id, targetDate);
+    } catch (err) {
+        console.error('Auto-Excel Gen Failed:', err);
+        // Don't fail the whole request if excel gen fails, but maybe warn?
     }
 
     res.json({ message: `Finalized ${expenditures.length} entries for ${targetDate.toDateString()}` });

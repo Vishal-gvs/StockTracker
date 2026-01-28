@@ -26,9 +26,11 @@ app.get('/', (req, res) => {
 import authRoutes from './routes/auth.routes';
 import itemRoutes from './routes/item.routes';
 import expenditureRoutes from './routes/expenditure.routes';
+import excelRoutes from './routes/excel.routes';
 
 app.use('/auth', authRoutes);
 app.use('/items', itemRoutes);
 app.use('/expenditure', expenditureRoutes);
+app.use('/excel', excelRoutes);
 
 export default app;
