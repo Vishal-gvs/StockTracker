@@ -22,12 +22,13 @@ const MainPage = () => {
     <div className="min-h-screen bg-gray-50">
       <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
+          <div className="flex flex-col sm:flex-row justify-between h-auto sm:h-16 py-2 sm:py-0">
+            <div className="flex items-center justify-between sm:justify-start">
               <h1 className="text-xl font-bold text-gray-900">StockTracker</h1>
+              {/* Mobile Logout could go here, but let's keep it simple for now and stack */}
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">Welcome, {user?.name}</span>
+            <div className="flex items-center justify-end space-x-4 mt-2 sm:mt-0">
+              <span className="text-gray-700 text-sm sm:text-base">Welcome, {user?.name}</span>
               <button onClick={logout} className="p-2 rounded-md hover:bg-gray-100">
                 <LogOut className="w-5 h-5 text-gray-600" />
               </button>
@@ -37,15 +38,15 @@ const MainPage = () => {
       </nav>
 
       <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-        <div className="px-4 py-6 sm:px-0">
-          <div className="bg-white rounded-lg shadow p-6">
+        <div className="px-2 py-4 sm:px-0">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6">
             <h2 className="text-lg font-medium mb-4">Daily Stock Entry ({new Date().toLocaleDateString()})</h2>
             
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item Name</th>
+                    <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item Name</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock Available</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity Used</th>
                     <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>

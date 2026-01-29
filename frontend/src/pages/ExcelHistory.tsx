@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
-import './ExcelHistory.css'; // Assuming we might want some styles, or inline for now
 
 interface ExcelFile {
   _id: string; // Mongo Object ID
@@ -102,42 +101,48 @@ const ExcelHistory: React.FC = () => {
   }, {} as Record<string, ExcelFile[]>);
 
   return (
-    <div className="history-container">
-      <h2>Excel Reports History</h2>
+    <div className="p-4 max-w-4xl mx-auto">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Excel Reports History</h2>
       
-      <div className="actions">
-        <button onClick={handleGenerate} disabled={loading} className="generate-btn">
+      <div className="mb-6">
+        <button 
+          onClick={handleGenerate} 
+          disabled={loading} 
+          className="bg-green-600 text-white px-5 py-2.5 rounded-md hover:bg-green-700 disabled:bg-green-300 disabled:cursor-not-allowed font-medium transition-colors w-full sm:w-auto"
+        >
           {loading ? 'Generating...' : 'Generate New Daily Report'}
         </button>
       </div>
 
-      <div className="history-list">
+      <div className="space-y-6">
         {Object.keys(groupedFiles).length === 0 ? (
-          <p>No reports generated yet.</p>
+          <p className="text-gray-500 text-center py-8">No reports generated yet.</p>
         ) : (
           Object.entries(groupedFiles).map(([dateGroup, groupFiles]) => (
-            <div key={dateGroup} className="month-group">
-              <div className="month-header">
-                  <h3>{dateGroup}</h3>
+            <div key={dateGroup} className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+              <div className="bg-gray-50 px-4 py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-200">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-2 sm:mb-0">{dateGroup}</h3>
                   <button 
                     onClick={() => handleGenerateMonthly(dateGroup)} 
                     disabled={loading}
-                    className="generate-monthly-btn"
+                    className="bg-green-600 text-white px-3 py-1.5 rounded text-sm hover:bg-green-700 disabled:bg-green-300 disabled:cursor-not-allowed w-full sm:w-auto"
                   >
                     Generate Monthly Report
                   </button>
               </div>
-              <ul>
+              <ul className="divide-y divide-gray-100">
                 {groupFiles.map((file) => (
-                  <li key={file._id} className="file-item">
-                    <span className="file-name">{file.fileName}</span>
-                    <span className="file-date">{new Date(file.createdAt).toLocaleString()}</span>
-                    <div className="file-actions">
-                        <button onClick={() => handleDownload(file.fileId, file.fileName)} className="download-btn">
-                        Download
+                  <li key={file._id} className="p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center hover:bg-gray-50 transition-colors">
+                    <div className="flex flex-col mb-2 sm:mb-0">
+                        <span className="font-medium text-gray-900">{file.fileName}</span>
+                        <span className="text-sm text-gray-500">{new Date(file.createdAt).toLocaleString()}</span>
+                    </div>
+                    <div className="flex gap-2 w-full sm:w-auto">
+                        <button onClick={() => handleDownload(file.fileId, file.fileName)} className="bg-blue-600 text-white px-4 py-2 rounded text-sm hover:bg-blue-700 flex-1 sm:flex-none text-center">
+                            Download
                         </button>
-                        <button onClick={() => handleDelete(file.fileId)} className="delete-btn">
-                        Delete
+                        <button onClick={() => handleDelete(file.fileId)} className="bg-red-600 text-white px-4 py-2 rounded text-sm hover:bg-red-700 flex-1 sm:flex-none text-center">
+                            Delete
                         </button>
                     </div>
                   </li>

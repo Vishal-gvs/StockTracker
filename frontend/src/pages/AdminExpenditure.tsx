@@ -41,8 +41,8 @@ const ItemModal = ({ onClose, onSuccess, initialData }: {
     });
 
     return (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4">
-            <div className="bg-white p-5 rounded-lg shadow-xl w-full max-w-lg">
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center p-4 z-50">
+            <div className="bg-white p-5 rounded-lg shadow-xl w-full max-w-sm sm:max-w-lg mx-auto">
                 <h3 className="text-lg font-bold mb-4">{initialData ? 'Edit Item' : 'Add New Item'}</h3>
                 <form onSubmit={handleSubmit((data) => mutation.mutate({ ...data, availableStock: Number(data.availableStock), costPerUnit: Number(data.costPerUnit) }))}>
                     <div className="mb-4">
@@ -117,12 +117,12 @@ const AdminExpenditure = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-       <nav className="bg-white shadow-sm">
+      <nav className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center flex-wrap">
-              <h1 className="text-xl font-bold text-gray-900 mr-4">StockTracker Admin</h1>
-              <div className="flex items-baseline space-x-4 mt-2 sm:mt-0">
+          <div className="flex flex-col sm:flex-row justify-between h-auto sm:h-16 py-2 sm:py-0">
+            <div className="flex flex-col sm:flex-row items-center sm:items-center flex-wrap">
+              <h1 className="text-xl font-bold text-gray-900 mr-0 sm:mr-4 mb-2 sm:mb-0">StockTracker Admin</h1>
+              <div className="flex items-baseline space-x-2 sm:space-x-4">
                   <button 
                     onClick={() => setActiveTab('daily')} 
                     className={`px-3 py-2 rounded-md text-sm font-medium ${activeTab === 'daily' ? 'bg-gray-900 text-white' : 'text-gray-900 hover:bg-gray-200'}`}
@@ -143,8 +143,8 @@ const AdminExpenditure = () => {
                   </Link>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <span className="text-gray-700">{user?.name}</span>
+            <div className="flex items-center justify-end space-x-4 mt-2 sm:mt-0">
+              <span className="text-gray-700 text-sm sm:text-base">{user?.name}</span>
               <button onClick={logout} className="p-2 rounded-md hover:bg-gray-100">
                 <LogOut className="w-5 h-5 text-gray-600" />
               </button>
