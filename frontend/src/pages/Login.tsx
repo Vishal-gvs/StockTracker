@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { GoogleLogin } from '@react-oauth/google'; 
@@ -17,15 +17,9 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const Login = () => {
-  const { login, user } = useAuth();
-  const navigate = useNavigate();
+  const { login } = useAuth();
 
-  useEffect(() => {
-    if (user) {
-      if (user.role === 'admin') navigate('/admin');
-      else navigate('/dashboard');
-    }
-  }, [user, navigate]);
+
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
